@@ -36,9 +36,34 @@ func getFoodMenu(c echo.Context) error {
 	})
 }
 
+func getDrinkMenu(c echo.Context) error {
+	drinkMenu := []MenuItem{
+		{
+			Name:      "Teh Pucuk",
+			OrderCode: "teh_pucuk",
+			Price:     37500,
+		},
+		{
+			Name:      "Jus Jeruk",
+			OrderCode: "jus_jeruk",
+			Price:     41250,
+		},
+		{
+			Name:      "Air Putih",
+			OrderCode: "air_putih",
+			Price:     41250,
+		},
+	}
+
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"data": drinkMenu,
+	})
+}
+
 func main() {
 	e := echo.New()
 	// localhost:14045/menu/food
 	e.GET("/menu/food", getFoodMenu)
+	e.GET("/menu/drinks", getDrinkMenu)
 	e.Logger.Fatal(e.Start(":14045"))
 }
